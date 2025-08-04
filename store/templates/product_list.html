@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- Heading -->
+    <h2 class="text-center mb-4  fw-bold">Our Products</h2>
+
+    <!-- Image -->
+    <div class="text-center mb-4">
+        <img src="{% static 'images/sapford-perfume.png' %}" alt="SAPFORD Perfume "
+             class="img-fluid rounded" style="max-width: 250px;">
+    </div>
+
+    <!-- Product Cards -->
+    <div class="row justify-content-center">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" >
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text fw-bold">Rs. {{ product.price }}</p>
+                    <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- GO TO CART BUTTON -->
+    <div class="text-center mt-4">
+        <a href="{% url 'view_cart' %}" class="btn btn-primary btn-lg">🛒 Go to Cart</a>
+    </div>
+
+</div>
+{% endblock %}
